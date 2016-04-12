@@ -1,0 +1,15 @@
+<h3 class="statusMsg">{{ mensajeEstado }}</h3>
+
+<div>
+	<form ng-submit="obtenerActores()">
+		<p>Para que funcione en su PC, ingrese la URL para obtener actores de Java EE</p>
+		<input ng-model="urlGetActores" type="text" value="" style="width:600px" required/>
+		<button>Obtener</button>
+	</form>
+</div>
+
+<div>
+	<ul>
+		<li ng-repeat="actor in actores">{{ actor.firstName }} {{ actor.lastName }} <a href="" ng-click="deleteActor(actor.actorId)">x</a></li>
+	</ul>
+</div>

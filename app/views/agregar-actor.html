@@ -1,0 +1,16 @@
+<h3 class="statusMsg">{{ mensajeEstado }}</h3>
+
+<div>
+	<form ng-submit="postActor()" name="postActorForm">
+		<p>Para que funcione en su PC, ingrese la URL para agregar actores de Java EE</p>
+		<input ng-model="urlPostActores" type="text" value="" style="width:600px" required/>
+
+		<p>Primer nombre</p>
+		<input ng-model="primerNombre" type="text" value="" style="width:600px" required/>
+
+		<p>Ultimo nombre</p>
+		<input ng-model="ultimoNombre" type="text" value="" style="width:600px" required/>
+
+		<button type="submit">Agregar actor</button>
+	</form>	
+</div>
