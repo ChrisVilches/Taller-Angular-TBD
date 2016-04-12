@@ -1,6 +1,6 @@
 (function(){
     angular.module('angularSpa')
-.controller('agregarActorCtrl', function($scope, $http, url){
+.controller('agregarActorCtrl', function($scope, $http, url, input){
 
 	// Cargar la URL guardada
 	$scope.urlActores = url.obtenerURLActors();
@@ -13,23 +13,18 @@
 		// Obtener los datos del formulario
 		var urlActores = $scope.urlActores;
 
-		// PLF
-		// Ver si el nombre corresponde a un formato de nombre "firstname lastname"
-		if(/^(\s*[a-zA-Z]+\s+[a-zA-Z]+\s*)$/.test($scope.nombreCompleto) == false){
-			// Error de formato
-			$scope.mensajeEstado = "Error de formato: debe ser primero nombre, y luego ultimo nombre";
+		// Validar entrada (debe tener el formato correcto) y obtener
+		// el primer y segundo nombre por separado (en un arreglo de strings)
+		var entradaNombres = input.obtenerNombre($scope.nombreCompleto);
+
+		if(entradaNombres == false){
+			$scope.mensajeEstado = "Error de formato: debe ser primer nombre, y luego ultimo nombre";
 			return;
-		}
-
-		// Quitar el espacio extra al inicio y al final
-		$scope.nombreCompleto = $scope.nombreCompleto.trim();
-
-		// Partir la string usando \s+ como delimitador (uno o mas espacios)
-		var split = $scope.nombreCompleto.split(/\s+/);
+		}		
 
 		// Obtener el primer y segundo nombre
-		var firstname = split[0];
-		var lastname = split[1];
+		var firstname = entradaNombres[0];
+		var lastname = entradaNombres[1];
 
 		// Crear el objeto JSON para postearlo
 		var objJson = {
@@ -45,8 +40,7 @@
 			$scope.mensajeEstado = "Se agrego '"+firstname+" "+lastname+"' exitosamente";
 
 			// Limpiar el formulario
-			$scope.primerNombre = "";
-			$scope.ultimoNombre = "";
+			$scope.nombreCompleto = "";
 		})
 
 		// Cuando hay error
