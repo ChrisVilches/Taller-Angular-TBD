@@ -1,25 +1,30 @@
 (function(){
     angular.module('angularSpa')
-.controller('listarActoresCtrl', function($scope, $http){
+.controller('listarActoresCtrl', function($scope, $http, url){
 
-	// URL por defecto
-	$scope.urlGetActores = "http://felo-all-series:8080/sakila-backend-master2/actors";
-
+	// Cual actor tiene abierto el dialogo de confirmacion para eliminar.
+	// Al hacer click en el boton "X" se cambia esta ID a la ID del actor, y con eso
+	// abre un dialogo de confirmacion para eliminar el actor.
+	$scope.dialogoConfirmacion = {
+		id: 0
+	}
 
 	$scope.deleteActor = function(id){
 
-		// La URL de delete es la misma que para Get
-		var url = $scope.urlGetActores;
+		// Guardar la URL
+		url.guardarURLActors($scope.urlActores);
+
+		var urlActores = $scope.urlActores;
 
 		// Si el ultimo caracter de la URL es un slash / entonces
 		// se le agrega la id solamente, sino, se le agrega un slash y la id
-		if(url[url.length - 1] == '/'){
-			url += id;
+		if(urlActores[urlActores.length - 1] == '/'){
+			urlActores += id;
 		} else {
-			url += "/"+id;
+			urlActores += "/"+id;
 		}
 		
-		$http.delete(url)
+		$http.delete(urlActores)
 
 		// Exito
 		.then(function(result){
@@ -35,6 +40,7 @@
 			});
 		})
 
+		// Error
 		.catch(function(error){
 			$scope.mensajeEstado = "Se obtuvo un error (codigo: "+error.status+")";
 		});
@@ -44,7 +50,10 @@
 
 	$scope.obtenerActores = function(){
 
-		$http.get($scope.urlGetActores)
+		// Guardar la URL
+		url.guardarURLActors($scope.urlActores);
+
+		$http.get($scope.urlActores)
 
 		// Exito
 		.then(function(result){
@@ -56,11 +65,20 @@
 
 		// Error
 		.catch(function(error){
-			// Colocar un mensaje de error
+			// Vaciar arreglo de actores
 			$scope.actores = [];
+
+			// Colocar un mensaje de error
 			$scope.mensajeEstado = "Se obtuvo un error (codigo: "+error.status+")";
 		});
 	}
+
+
+	// Cargar la URL guardada
+	$scope.urlActores = url.obtenerURLActors();
+	
+	// Cargar los actores al inicializar el controlador
+	$scope.obtenerActores();
 
 
 });

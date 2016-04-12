@@ -1,16 +1,18 @@
 (function(){
     angular.module('angularSpa')
-.controller('agregarActorCtrl', function($scope, $http){
+.controller('agregarActorCtrl', function($scope, $http, url){
 
-	// URL por defecto
-	$scope.urlPostActores = "http://felo-all-series:8080/sakila-backend-master2/actors";
-
+	// Cargar la URL guardada
+	$scope.urlActores = url.obtenerURLActors();
 
 	$scope.postActor = function(){
 
+		// Guardar la URL
+		url.guardarURLActors($scope.urlActores);
+
 		// Obtener los datos del formulario
 
-		var url = $scope.urlPostActores;
+		var urlActores = $scope.urlActores;
 		var firstname = $scope.primerNombre;
 		var lastname = $scope.ultimoNombre;
 
@@ -21,7 +23,7 @@
 		};
 
 
-		$http.post(url, objJson)
+		$http.post(urlActores, objJson)
 
 		// Cuando hay exito
 		.then(function(){
