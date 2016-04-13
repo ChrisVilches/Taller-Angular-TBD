@@ -2,13 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title></title>
-  <!-- Recursos de bower-->
-  <!-- build:css css/vendor.css -->   
-  <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
+  <title>Taller de base de datos TBD</title>
 
   <!-- Estilos personalizados-->
   <!-- build:css css/main.css -->  
@@ -17,41 +11,83 @@
   <!-- endinject -->
   <!-- endbuild -->
 </head>
-<body ng-app="angularSpa">
-<nav class="navbar navbar-default">
-  <ul class="nav navbar-nav navbar-right">
-    <li><a href="#/home">Inicio</a></li>
-    <li><a href="#/listar-actores">Ver actores</a></li>
-    <li><a href="#/agregar-actor">Agregar actor</a></li>
-    <li><a href="#/about">Acerca de</a></li>
-  </ul>
-</nav>
-<div class="container">
-    <img class="logo" src="images/angular.png" alt="logo">
-    <h1>Angular</h1>    
-    <div ng-view=""></div>
-</div>
-  <!-- Recursos de bower-->
-  <!-- build:js js/vendor.js --> 
-  <!-- bower:js -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <!-- endbower -->
-  <!-- endbuild -->
 
-  <!-- Recursos personales-->
-  <!-- build:js js/scripts.js -->   
-  <!-- inject:js -->
-  <script src="scripts/app.js"></script>
-  <script src="scripts/controllers/aboutCtrl.js"></script>
-  <script src="scripts/controllers/agregarActorCtrl.js"></script>
-  <script src="scripts/controllers/listarActoresCtrl.js"></script>
-  <script src="scripts/controllers/mainCtrl.js"></script>
-  <script src="scripts/services/input.js"></script>
-  <script src="scripts/services/url.js"></script>
-  <!-- endinject -->
-  <!-- endbuild -->
+<body ng-app="angularSpa" class="docs language-php">     
+
+  <!-- Barra superior -->
+  <nav class="main">
+    <div class="container">
+
+      <!-- Logo -->
+      <a href="/" class="brand">
+        <img src="/images/angular.png" height="60" alt="Angular logo">
+        TBD
+      </a>
+
+      <!-- Menu superior -->
+      <ul class="main-nav">
+        <li class="nav-docs"><a href="#/home">Inicio</a></li>
+        <li class="nav-docs"><a href="#/listar-actores">Ver actores</a></li>
+        <li class="nav-docs"><a href="#/agregar-actor">Agregar actor</a></li>
+        <li class="nav-docs"><a href="#/about">Acerca de</a></li>
+        
+      </ul>
+    </div>
+  </nav>
+
+  <div class="docs-wrapper container">
+
+    <!-- Menu lateral -->
+    <section class="sidebar">
+      <ul>
+        <li>Menu
+          <ul>
+           <li><a href="#/home">Inicio</a></li>
+           <li><a href="#/listar-actores">Ver actores</a></li>
+           <li><a href="#/agregar-actor">Agregar actor</a></li>
+           <li><a href="#/about">Acerca de</a></li>
+         </ul>
+       </li>
+     </ul>
+   </section>
+
+   <!-- Contenido central -->
+   <article ng-view=""></article>
+
+ </div>
+
+ <!-- Parte de abajo -->
+ <footer class="main">
+  <ul>
+    <li class="nav-docs"><a href="https://github.com/FeloVilches/Taller-Angular-TBD" target="_blank">Repositorio Github</a></li>
+  </ul>
+
+  <p>Taller de base de datos, 2016-1</p>
+</footer>
+
+
+<!-- Recursos de bower-->
+<!-- build:js js/vendor.js --> 
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- Recursos personales-->
+<!-- build:js js/scripts.js -->   
+<!-- inject:js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/aboutCtrl.js"></script>
+<script src="scripts/controllers/agregarActorCtrl.js"></script>
+<script src="scripts/controllers/listarActoresCtrl.js"></script>
+<script src="scripts/controllers/mainCtrl.js"></script>
+<script src="scripts/services/input.js"></script>
+<script src="scripts/services/url.js"></script>
+<!-- endinject -->
+<!-- endbuild -->
+
 </body>
 </html>

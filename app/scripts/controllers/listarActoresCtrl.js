@@ -118,7 +118,8 @@
 				if(actor.actorId == id){
 					// Cuando se encuentra el actor que se quiere eliminar, se borra del arreglo.
 					// De esta forma se borra de la BD, pero se actualiza la vista tambien.
-					$scope.actores.splice(i, 1);
+					$scope.mensajeEstado = "Se elimino '"+actor.firstName+" "+actor.lastName+"' exitosamente";
+					$scope.actores.splice(i, 1);					
 					return;
 				}
 			});
@@ -138,6 +139,9 @@
 		$scope.urlActores = url.guardarURLActors($scope.urlActores);
 
 		if(url.urlInvalida($scope.urlActores)) return;
+
+		// Limpiar los actores actuales
+		$scope.actores = null;
 
 		$http.get($scope.urlActores)
 

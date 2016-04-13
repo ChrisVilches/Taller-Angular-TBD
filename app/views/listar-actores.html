@@ -1,9 +1,12 @@
-<h3 class="statusMsg">{{ mensajeEstado }}</h3>
+<h1>Listar actores</h1>
+
+<div class="statusMsg">{{ mensajeEstado }}</div>
 
 <div>
 	<form ng-submit="obtenerActores()">
-		<p>Para que funcione en su PC, ingrese la URL para obtener actores de Java EE</p>
+		<p>Para que funcione en su PC, ingrese la URL para obtener actores de Java EE<br>
 		<input ng-model="urlActores" type="text" value="" style="width:600px" required/>
+		</p>
 		<button>Obtener</button>
 	</form>
 </div>
@@ -17,14 +20,18 @@
 	<p ng-show="actores.length == 0">No hay actores que mostrar.</p>
 
 	<!-- Si hay actores -->
-	<ul ng-show="actores.length > 0">
+	<ul ng-show="actores.length > 0" class="listaActores">
 
-		<li ng-repeat="actor in actores" ng-model="listaActores">
+		<p>Hay {{actores.length}} actores. <a href="#/agregar-actor">Agregar actor</a></p>
+
+		<li 
+		ng-repeat="actor in actores" 
+		ng-model="listaActores" >
 
 			<!-- Mostrar el nombre y apellido de cada actor -->
 			<span 
-			title="{{ actor.lastUpdate }}"
-			ng-click="formularioUpdate.preparar(actor)" 
+			title="{{ actor.lastUpdate }}"	
+			ng-click="formularioUpdate.preparar(actor)"		
 			ng-hide="formularioUpdate.mostrando(actor)">
 				{{ actor.firstName }} {{ actor.lastName }}
 			</span> 
@@ -40,7 +47,7 @@
 
 				<!-- Cuando se ejecuta la funcion formularioUpdate.preparar(), se crea una string que contiene
 				el nombre completo de la persona, en una sola string, la cual ira en el formulario -->
-				<input type="text" ng-model="formularioUpdate.string" placeholder="firstname lastname"/>
+				<input class="updateLista" type="text" ng-model="formularioUpdate.string" placeholder="firstname lastname"/>
 
 				<!-- Concretar la actualizacion (realizarla en la BD) -->
 				<button type="submit" ng-click="updateActor()">Actualizar</button>
@@ -52,10 +59,10 @@
 				<button ng-click="dialogoConfirmacion.preparar(actor)">x</button>
 
 				<!-- Dialogo de confirmacion para eliminar -->
-				<span ng-show="dialogoConfirmacion.mostrando(actor)">Desea realmente eliminar?
+				<p ng-show="dialogoConfirmacion.mostrando(actor)">Desea realmente eliminar?
 					<a href="" ng-click="deleteActor(actor.actorId)">confirmar</a> | 
 					<a href="" ng-click="dialogoConfirmacion.cerrar()">cancelar</a>
-				</span>
+				</p>
 
 			</form> 
 		</li>

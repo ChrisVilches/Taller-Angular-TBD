@@ -37,7 +37,7 @@ gulp.task('wiredep', function () {
 //Compila archivos Sass a Css 
 gulp.task('sass', function(){
     gulp.src('./app/styles/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
@@ -74,7 +74,6 @@ gulp.task('copy', function(){
 });
 
 
-
 gulp.task('clean', function(){
     return del([
         './dist/**/*'
@@ -88,7 +87,7 @@ gulp.task('useref', function () {
         .pipe(assets)
         .pipe(gulpif('*.js',ngAnnotate()))
         .pipe(gulpif('*.js', uglify()))
-        .pipe(gulpif('*.css', minifyCss()))
+        .pipe(gulpif('*.css', minifyCss()))        
         .pipe(assets.restore())
         .pipe(useref()) 
         .pipe(gulp.dest('dist'));
