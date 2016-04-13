@@ -18,16 +18,41 @@
 		<li ng-repeat="actor in actores" ng-model="listaActores">
 
 			<!-- Mostrar el nombre y apellido de cada actor -->
-			{{ actor.firstName }} {{ actor.lastName }} 
+			<span 
+			ng-click="formularioUpdate.preparar(actor)" 
+			ng-hide="formularioUpdate.mostrando(actor)">
+				{{ actor.firstName }} {{ actor.lastName }}
+			</span> 
 
-			<!-- Boton para eliminar. Al clicarlo, abre un dialogo de confirmacion -->
-			<a href="" ng-click="dialogoConfirmacion.id = actor.actorId">x</a>
+			<!-- Actualizar los datos de un actor
+			Este bloque contiene informacion que aparece y se esconde
+			ya que el usuario debe clicar la fila del actor. Muestra un mini formulario
+			para actualizar los datos del actor, y otro para borrar, el cual tiene un
+			dialogo de confirmacion -->
+			<form 
+			style="display:inline"
+			ng-show="formularioUpdate.mostrando(actor)">
 
-			<!-- Dialogo de confirmacion para eliminar -->
-			<span ng-show="dialogoConfirmacion.id == actor.actorId">Desea realmente eliminar?
-				<a href="" ng-click="deleteActor(actor.actorId)">confirmar</a> | 
-				<a href="" ng-click="dialogoConfirmacion.id = 0">cancelar</a>
-			</span>
+				<input type="text" ng-model="formularioUpdate.string"/>
+
+				<button ng-click="updateActor()">Actualizar</button>
+				<button ng-click="formularioUpdate.cerrar()">Cancelar</button>
+
+				<!-- Boton para eliminar. Al clicarlo, abre un dialogo de confirmacion -->
+				<button ng-click="dialogoConfirmacion.preparar(actor)">x</button>
+				
+				<!-- Dialogo de confirmacion para eliminar -->
+				<span ng-show="dialogoConfirmacion.mostrando(actor)">Desea realmente eliminar?
+					<a href="" ng-click="deleteActor(actor.actorId)">confirmar</a> | 
+					<a href="" ng-click="dialogoConfirmacion.cerrar()">cancelar</a>
+				</span>
+
+			</form> 
+
+
+			
+
+			
 
 		</li>
 	</ul>

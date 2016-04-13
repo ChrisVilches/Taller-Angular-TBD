@@ -1,13 +1,101 @@
 (function(){
     angular.module('angularSpa')
-.controller('listarActoresCtrl', function($scope, $http, url){
+.controller('listarActoresCtrl', function($scope, $http, url, input){
 
-	// Cual actor tiene abierto el dialogo de confirmacion para eliminar.
+	// Obtiene cual actor tiene abierto el dialogo de confirmacion para eliminar.
 	// Al hacer click en el boton "X" se cambia esta ID a la ID del actor, y con eso
 	// abre un dialogo de confirmacion para eliminar el actor.
 	$scope.dialogoConfirmacion = {
-		id: 0
+		id: 0,
+		// Prepara el dialogo de confirmacion con la ID del actor
+		preparar: function(actorArg){
+			this.id = actorArg.actorId;
+		},
+		// Booleano, verdadero si es el actor "actorArg" el cual se ha seleccionado
+		// para mostrar su dialogo de confirmacion
+		mostrando: function(actorArg){
+			if(actorArg.actorId == this.id){
+				return true;
+			}
+			return false;
+		},
+		// Cerrar el dialogo de confirmacion
+		cerrar: function(){
+			this.id = 0;
+		}
+	};
+
+	// Similar pero se pasa el actor completo ya que se necesitan mas datos
+	$scope.formularioUpdate = {
+		actor: null,
+		string: null,
+		preparar: function(actorArg){
+			this.actor = actorArg;
+			this.string = this.actor.firstName+" "+this.actor.lastName;
+			$scope.dialogoConfirmacion.cerrar();
+		},
+		mostrando: function(actorArg){
+			if(this.actor != null && actorArg.actorId == this.actor.actorId){
+				return true;
+			}
+			return false;
+		},
+		cerrar: function(){
+			this.actor = null;
+			this.string = null;
+		}
+	};
+
+
+
+	$scope.updateActor = function(){
+
+		// Guardar la URL
+		url.guardarURLActors($scope.urlActores);
+
+		var urlActores = $scope.urlActores;
+
+		var entradaNombres = input.obtenerNombre($scope.formularioUpdate.string);
+
+		if(entradaNombres == false){
+			$scope.mensajeEstado = "Error de formato: debe ser primer nombre, y luego ultimo nombre";
+			return;
+		}	
+
+		// Obtener el primer y segundo nombre
+		var firstname = entradaNombres[0];
+		var lastname = entradaNombres[1];
+
+		// Crear el objeto JSON
+		var objJson = {
+			firstName: firstname,
+			lastName: lastname
+		};
+
+		var id = $scope.formularioUpdate.actor.actorId;
+
+		$http.put(urlActores + "/"+id, objJson).then(function(){
+			$scope.mensajeEstado = "Se actualizo '"+firstname+" "+lastname+"' exitosamente";
+			$scope.formularioUpdate.cerrar();
+
+			// Busqueda para encontrar el que se actualizo, para modificarlo (para no tener
+			// que hacer el GET denuevo. Hacerlo asi es mas rapido)
+			$scope.actores.forEach(function (actor, i) {
+				if(actor.actorId == id){
+					actor.firstName = firstname;
+					actor.lastName = lastname;
+					return;
+				}
+			});
+
+		}).catch(function(error){
+			$scope.mensajeEstado = "Se obtuvo un error (codigo: "+error.status+")";
+		});
+
+
 	}
+
+
 
 	$scope.deleteActor = function(id){
 
@@ -16,15 +104,8 @@
 
 		var urlActores = $scope.urlActores;
 
-		// Si el ultimo caracter de la URL es un slash / entonces
-		// se le agrega la id solamente, sino, se le agrega un slash y la id
-		if(urlActores[urlActores.length - 1] == '/'){
-			urlActores += id;
-		} else {
-			urlActores += "/"+id;
-		}
-		
-		$http.delete(urlActores)
+	
+		$http.delete(urlActores + "/"+id)
 
 		// Exito
 		.then(function(result){
