@@ -9,6 +9,10 @@
 </div>
 
 <div>
+
+	<!-- Cuando todavia no se ha cargado nada, muestra este texto -->
+	<p ng-show="actores == null">Cargando...</p>
+
 	<!-- Si no hay actores que mostrar -->
 	<p ng-show="actores.length == 0">No hay actores que mostrar.</p>
 

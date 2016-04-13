@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "angular-loading-bar": "^0.9.0"
+  },
   "devDependencies": {
     "bower": "^1.6.5",
     "del": "^2.0.2",
