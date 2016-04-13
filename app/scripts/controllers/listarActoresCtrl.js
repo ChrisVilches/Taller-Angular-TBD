@@ -1,6 +1,6 @@
 (function(){
     angular.module('angularSpa')
-.controller('listarActoresCtrl', function($scope, $http, url, input){
+.controller('listarActoresCtrl', function($scope, $http, url, input, $interval){
 
 	// Obtiene cual actor tiene abierto el dialogo de confirmacion para eliminar.
 	// Al hacer click en el boton "X" se cambia esta ID a la ID del actor, y con eso
@@ -51,7 +51,9 @@
 	$scope.updateActor = function(){
 
 		// Guardar la URL
-		url.guardarURLActors($scope.urlActores);
+		$scope.urlActores = url.guardarURLActors($scope.urlActores);
+
+		if(url.urlInvalida($scope.urlActores)) return;
 
 		var urlActores = $scope.urlActores;
 
@@ -100,10 +102,11 @@
 	$scope.deleteActor = function(id){
 
 		// Guardar la URL
-		url.guardarURLActors($scope.urlActores);
+		$scope.urlActores = url.guardarURLActors($scope.urlActores);
+
+		if(url.urlInvalida($scope.urlActores)) return;
 
 		var urlActores = $scope.urlActores;
-
 	
 		$http.delete(urlActores + "/"+id)
 
@@ -132,7 +135,9 @@
 	$scope.obtenerActores = function(){
 
 		// Guardar la URL
-		url.guardarURLActors($scope.urlActores);
+		$scope.urlActores = url.guardarURLActors($scope.urlActores);
+
+		if(url.urlInvalida($scope.urlActores)) return;
 
 		$http.get($scope.urlActores)
 
@@ -160,6 +165,7 @@
 	
 	// Cargar los actores al inicializar el controlador
 	$scope.obtenerActores();
+
 
 
 });

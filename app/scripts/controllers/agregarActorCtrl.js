@@ -8,7 +8,9 @@
 	$scope.postActor = function(){
 
 		// Guardar la URL
-		url.guardarURLActors($scope.urlActores);
+		$scope.urlActores = url.guardarURLActors($scope.urlActores);
+
+		if(url.urlInvalida($scope.urlActores)) return;
 
 		// Obtener los datos del formulario
 		var urlActores = $scope.urlActores;

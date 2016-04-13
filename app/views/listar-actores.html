@@ -19,6 +19,7 @@
 
 			<!-- Mostrar el nombre y apellido de cada actor -->
 			<span 
+			title="{{ actor.lastUpdate }}"
 			ng-click="formularioUpdate.preparar(actor)" 
 			ng-hide="formularioUpdate.mostrando(actor)">
 				{{ actor.firstName }} {{ actor.lastName }}
@@ -33,14 +34,19 @@
 			style="display:inline"
 			ng-show="formularioUpdate.mostrando(actor)">
 
-				<input type="text" ng-model="formularioUpdate.string"/>
+				<!-- Cuando se ejecuta la funcion formularioUpdate.preparar(), se crea una string que contiene
+				el nombre completo de la persona, en una sola string, la cual ira en el formulario -->
+				<input type="text" ng-model="formularioUpdate.string" placeholder="firstname lastname"/>
 
-				<button ng-click="updateActor()">Actualizar</button>
+				<!-- Concretar la actualizacion (realizarla en la BD) -->
+				<button type="submit" ng-click="updateActor()">Actualizar</button>
+
+				<!-- Cerrar el dialogo de UPDATE -->
 				<button ng-click="formularioUpdate.cerrar()">Cancelar</button>
 
 				<!-- Boton para eliminar. Al clicarlo, abre un dialogo de confirmacion -->
 				<button ng-click="dialogoConfirmacion.preparar(actor)">x</button>
-				
+
 				<!-- Dialogo de confirmacion para eliminar -->
 				<span ng-show="dialogoConfirmacion.mostrando(actor)">Desea realmente eliminar?
 					<a href="" ng-click="deleteActor(actor.actorId)">confirmar</a> | 
@@ -48,12 +54,6 @@
 				</span>
 
 			</form> 
-
-
-			
-
-			
-
 		</li>
 	</ul>
 </div>

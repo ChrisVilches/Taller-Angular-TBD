@@ -6,6 +6,7 @@
     angular.module('angularSpa').factory('input', function() {
         
         var input = {};
+
         
         // Entrada: una string con el primer y segundo nombre
         // Salida: falso si la entrada es incorrecta,
