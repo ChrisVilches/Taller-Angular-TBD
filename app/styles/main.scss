@@ -2113,9 +2113,14 @@ body.the-404 .contain {
   padding:0;
 }
 
-.listaActores li{
-  list-style-type: none;
+.listaActores span{
+  width:100%;
+  display:inline-block;
   padding:5px;
+}
+
+.listaActores li{
+  list-style-type: none;  
 }
 .listaActores li:nth-child(odd) {
     background: #ffffff;
@@ -2136,6 +2141,11 @@ button {
     font-size: 16px;
     
 }
+
+input[type="text"]{
+  padding: 3px;
+}
+
 
 input.updateLista{
   width:100%;
