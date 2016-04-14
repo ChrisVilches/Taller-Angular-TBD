@@ -2113,13 +2113,14 @@ body.the-404 .contain {
   padding:0;
 }
 
-.listaActores span{
+.listaActores span{  
+  display:inline-block;  
   width:100%;
-  display:inline-block;
-  padding:5px;
 }
 
 .listaActores li{
+  width:100%;
+  padding:5px;
   list-style-type: none;  
 }
 .listaActores li:nth-child(odd) {
