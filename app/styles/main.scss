@@ -1439,6 +1439,9 @@ nav.main {
   float: right;
   margin-top: 25px;
   margin-left: 25px; }
+
+
+
   .responsive-sidebar-nav .btn {
     background: #333; }
 
@@ -2150,4 +2153,16 @@ input[type="text"]{
 
 input.updateLista{
   width:100%;
+
+}
+
+.responsive-sidebar-nav li{
+  list-style-type: none;
+}
+
+.responsive-sidebar-nav a{
+  color: #525252;
+}
+.responsive-sidebar-nav a:hover{
+  color: #f4645f;
 }

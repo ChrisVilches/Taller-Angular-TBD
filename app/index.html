@@ -29,9 +29,20 @@
         <li class="nav-docs"><a href="#/home">Inicio</a></li>
         <li class="nav-docs"><a href="#/listar-actores">Ver actores</a></li>
         <li class="nav-docs"><a href="#/agregar-actor">Agregar actor</a></li>
-        <li class="nav-docs"><a href="#/about">Acerca de</a></li>
-        
+        <li class="nav-docs"><a href="#/about">Acerca de</a></li>        
       </ul>
+
+      <!-- Aparece al achicar la pantalla  -->
+      <div class="responsive-sidebar-nav">
+          <ul>
+           <li><a href="#/home">Inicio</a></li>
+           <li><a href="#/listar-actores">Ver actores</a></li>
+           <li><a href="#/agregar-actor">Agregar actor</a></li>
+           <li><a href="#/about">Acerca de</a></li>
+         </ul>
+      </div>
+
+
     </div>
   </nav>
 
@@ -76,12 +87,12 @@
 <!-- build:js js/scripts.js -->   
 <!-- inject:js -->
 <script src="scripts/app.js"></script>
+<script src="scripts/services/input.js"></script>
+<script src="scripts/services/url.js"></script>
 <script src="scripts/controllers/aboutCtrl.js"></script>
 <script src="scripts/controllers/agregarActorCtrl.js"></script>
 <script src="scripts/controllers/listarActoresCtrl.js"></script>
 <script src="scripts/controllers/mainCtrl.js"></script>
-<script src="scripts/services/input.js"></script>
-<script src="scripts/services/url.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 
