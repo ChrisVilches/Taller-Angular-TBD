@@ -25,7 +25,7 @@
 		<p>Hay {{actores.length}} actores. <a href="#/agregar-actor">Agregar actor</a></p>
 
 		<li 
-		ng-repeat="actor in actores" 
+		ng-repeat="actor in actores | orderBy : '-actorId'" 
 		ng-model="listaActores" >
 
 			<!-- Mostrar el nombre y apellido de cada actor -->
