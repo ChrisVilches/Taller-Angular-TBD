@@ -138,7 +138,10 @@
 		// Guardar la URL
 		$scope.urlActores = url.guardarURLActors($scope.urlActores);
 
-		if(url.urlInvalida($scope.urlActores)) return;
+		if(url.urlInvalida($scope.urlActores))  {
+			$scope.actores = [];
+			return;
+		}
 
 		// Limpiar los actores actuales
 		$scope.actores = null;
@@ -157,7 +160,6 @@
 		.catch(function(error){
 			// Vaciar arreglo de actores
 			$scope.actores = [];
-
 			// Colocar un mensaje de error
 			$scope.mensajeEstado = "Se obtuvo un error (codigo: "+error.status+")";
 		});

@@ -9,7 +9,7 @@
 
 
         url.urlInvalida = function(urlArg){
-            if(urlArg == null) return true;
+            if(urlArg == null || urlArg == "") return true;
             return false;
         }
 
